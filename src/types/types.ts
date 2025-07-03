@@ -4,7 +4,7 @@ export interface StatCardTypes {
   subtitle: string;
   change: string;
   isPositive: boolean;
-  color: 'blue' | 'red' | 'green';
+  color: '#3b82f6' | '#22c55e' | 'red';
 }
 
 export interface Booking {

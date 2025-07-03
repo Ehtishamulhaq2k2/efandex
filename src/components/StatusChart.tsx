@@ -1,39 +1,29 @@
+import React from "react";
+
 interface StatChartProps {
   color: string;
   isPositive: boolean;
 }
 
-export const StatChart: React.FC<StatChartProps> = ({ color, isPositive }) => (
-  <div className="w-20 h-12 relative">
-    <svg viewBox="0 0 80 48" className="w-full h-full">
-      <defs>
-        <linearGradient
-          id={`gradient-${color.replace("#", "")}`}
-          x1="0%"
-          y1="0%"
-          x2="0%"
-          y2="100%"
-        >
-          <stop offset="0%" stopColor={color} stopOpacity="0.8" />
-          <stop offset="100%" stopColor={color} stopOpacity="0.1" />
-        </linearGradient>
-      </defs>
-      <path
-        d={
-          isPositive ? "M0,40 Q20,20 40,15 T80,10" : "M0,10 Q20,25 40,30 T80,35"
-        }
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
+export const StatChart: React.FC<StatChartProps> = ({ color, isPositive }) => {
+  // Decide image source based on `color` and `isPositive`
+  let imageName = "";
+
+  if (color === "#22c55e" && isPositive) {
+    imageName = "/greenUp.png";
+  } else if (color === "#3b82f6" && isPositive) {
+    imageName = "/BlueUp.png";
+  } else if (!isPositive) {
+    imageName = "/redDown.png";
+  }
+
+  return (
+    <div className="w-16 h-10 sm:w-20 sm:h-12 lg:w-24 lg:h-14 relative">
+      <img
+        src={imageName}
+        alt="Trend Graph"
+        className="w-full h-full object-contain"
       />
-      <path
-        d={
-          isPositive
-            ? "M0,40 Q20,20 40,15 T80,10 L80,48 L0,48 Z"
-            : "M0,10 Q20,25 40,30 T80,35 L80,48 L0,48 Z"
-        }
-        fill={`url(#gradient-${color.replace("#", "")})`}
-      />
-    </svg>
-  </div>
-);
+    </div>
+  );
+};

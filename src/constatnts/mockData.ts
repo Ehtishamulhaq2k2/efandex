@@ -17,7 +17,7 @@ export const mockStats: StatCardTypes[] = [
     subtitle: "Overall last month",
     change: "+30.5626%",
     isPositive: true,
-    color: "blue",
+    color: "#3b82f6",
   },
   {
     title: "Total Properties",
@@ -25,7 +25,7 @@ export const mockStats: StatCardTypes[] = [
     subtitle: "Overall last month",
     change: "+30.5626%",
     isPositive: true,
-    color: "red",
+    color: "#22c55e",
   },
   {
     title: "Total Revenue",
@@ -33,7 +33,7 @@ export const mockStats: StatCardTypes[] = [
     subtitle: "Overall this month",
     change: "-30.5626%",
     isPositive: false,
-    color: "green",
+    color: "red",
   },
 ];
 
