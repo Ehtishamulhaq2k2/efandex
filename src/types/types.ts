@@ -23,7 +23,7 @@ export interface Registration {
   category: 'Guest' | 'Host';
   joinDate: string;
   email: string;
-  categoryColor: 'green' | 'yellow';
+  categoryColor: '#E6F7F8' | '#DCB21E33';
 }
 
 export interface MenuItem {

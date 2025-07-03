@@ -1,4 +1,11 @@
-import { Calendar, Download, MoreHorizontal, ChevronDown } from "lucide-react";
+import {
+  Calendar,
+  Download,
+  MoreHorizontal,
+  ChevronDown,
+  CheckCircle,
+  XCircle,
+} from "lucide-react";
 import { Registration } from "../types/types";
 import { CategoryBadge } from "./CategoryBadge";
 import { Pagination } from "./Paginations";
@@ -99,10 +106,7 @@ export const RegistrationsTable: React.FC<{
                   {registration.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <CategoryBadge
-                    category={registration.category}
-                    color={registration.categoryColor}
-                  />
+                  <CategoryBadge category={registration.category} />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {registration.joinDate}
@@ -111,10 +115,14 @@ export const RegistrationsTable: React.FC<{
                   {registration.email}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                  <button className="text-red-600 hover:text-red-800 font-medium">
+                  <button className="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 hover:text-red-700 transition">
+                    <XCircle className="w-4 h-4 mr-1" />
                     Decline
                   </button>
-                  <button className="text-green-600 hover:text-green-800 font-medium">
+
+                  {/* Approve Button */}
+                  <button className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-600 border border-green-200 hover:bg-green-100 hover:text-green-700 transition">
+                    <CheckCircle className="w-4 h-4 mr-1" />
                     Approve
                   </button>
                 </td>

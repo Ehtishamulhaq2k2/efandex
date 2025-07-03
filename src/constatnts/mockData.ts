@@ -83,7 +83,7 @@ export const mockRegistrations: Registration[] = [
     category: "Guest",
     joinDate: "Jan 13, 2022",
     email: "Userefandax1234@gmail.com",
-    categoryColor: "green",
+    categoryColor: "#DCB21E33",
   },
   {
     id: "2",
@@ -91,7 +91,7 @@ export const mockRegistrations: Registration[] = [
     category: "Host",
     joinDate: "Jan 12, 2022",
     email: "Userefandax1234@gmail.com",
-    categoryColor: "yellow",
+    categoryColor: "#DCB21E33",
   },
   {
     id: "3",
@@ -99,7 +99,7 @@ export const mockRegistrations: Registration[] = [
     category: "Guest",
     joinDate: "Jan 12, 2022",
     email: "Userefandax1234@gmail.com",
-    categoryColor: "green",
+    categoryColor: "#E6F7F8",
   },
   {
     id: "4",
@@ -107,7 +107,7 @@ export const mockRegistrations: Registration[] = [
     category: "Host",
     joinDate: "Jan 12, 2022",
     email: "Userefandax1234@gmail.com",
-    categoryColor: "yellow",
+    categoryColor: "#DCB21E33",
   },
   {
     id: "5",
@@ -115,7 +115,7 @@ export const mockRegistrations: Registration[] = [
     category: "Guest",
     joinDate: "Jan 12, 2022",
     email: "Userefandax1234@gmail.com",
-    categoryColor: "green",
+    categoryColor: "#E6F7F8",
   },
 ];
 
