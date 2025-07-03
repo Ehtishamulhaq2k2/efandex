@@ -1,7 +1,7 @@
 import React from "react";
 import { menuItems } from "../constatnts/mockData";
 import { SearchInput } from "./SearchBar";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export const Sidebar: React.FC<{
   activeTab: string;
@@ -23,12 +23,12 @@ export const Sidebar: React.FC<{
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden md:block w-64 bg-white shadow-sm border-r border-gray-200 h-full fixed top-0 left-0 z-30">
-        <div className="p-4 lg:p-6">
-          <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Efandex</h1>
+      <div className="hidden md:flex w-64 bg-white shadow-sm border-r border-gray-200 h-screen fixed top-0 left-0 z-30 flex-col">
+        <div className="p-6">
+          <h1 className="text-2xl font-bold text-black">Efandex</h1>
         </div>
 
-        <div className="px-3 lg:px-4 mb-4 lg:mb-6">
+        <div className="px-4 mb-6">
           <SearchInput
             placeholder="Search..."
             className="w-full"
@@ -39,30 +39,61 @@ export const Sidebar: React.FC<{
           />
         </div>
 
-        <nav className="px-3 lg:px-4 space-y-1 h-full overflow-y-auto pb-20">
-          {filteredItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            const isLogout = item.id === "logout";
+        <div className="flex flex-col h-full px-4 overflow-hidden">
+          {/* Top Menu */}
+          <div className="flex-1 overflow-y-auto space-y-1">
+            {filteredItems
+              .filter((item) => item.id !== "logout" && item.id !== "privacy")
+              .map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
 
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleItemClick(item.id)}
-                className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  isActive
-                    ? "bg-gray-900 text-white"
-                    : isLogout
-                    ? "text-red-600 hover:bg-red-50"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                <Icon className="mr-3 w-4 h-4 flex-shrink-0" />
-                <span className="truncate">{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleItemClick(item.id)}
+                    className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-black text-white"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <Icon className="mr-3 w-4 h-4 flex-shrink-0" />
+                    <span className="truncate">{item.label}</span>
+                  </button>
+                );
+              })}
+          </div>
+
+          {/* Bottom Menu */}
+          <div className="space-y-2 pt-4 pb-6">
+            {filteredItems
+              .filter((item) => item.id === "privacy" || item.id === "logout")
+              .map((item) => {
+                const Icon = item.icon;
+                const isLogout = item.id === "logout";
+
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleItemClick(item.id)}
+                    className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      isLogout
+                        ? "bg-red-500 text-white hover:bg-red-600"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <Icon
+                      className={`mr-3 w-4 h-4 flex-shrink-0 ${
+                        isLogout ? "text-white" : "text-gray-700"
+                      }`}
+                    />
+                    <span className="truncate">{item.label}</span>
+                  </button>
+                );
+              })}
+          </div>
+        </div>
       </div>
 
       {/* Mobile Drawer Sidebar */}
@@ -79,7 +110,7 @@ export const Sidebar: React.FC<{
             {/* Header */}
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
               <h1 className="text-xl font-bold text-gray-900">Efandex</h1>
-              <button 
+              <button
                 onClick={() => setIsDrawerOpen(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg"
               >
@@ -100,7 +131,7 @@ export const Sidebar: React.FC<{
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+            <div className="flex-1 p-4 space-y-1 overflow-y-auto">
               {filteredItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
@@ -110,7 +141,7 @@ export const Sidebar: React.FC<{
                   <button
                     key={item.id}
                     onClick={() => handleItemClick(item.id)}
-                    className={`w-full flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-colors ${
+                    className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                       isActive
                         ? "bg-gray-900 text-white"
                         : isLogout
@@ -123,7 +154,7 @@ export const Sidebar: React.FC<{
                   </button>
                 );
               })}
-            </nav>
+            </div>
           </div>
         </div>
       )}

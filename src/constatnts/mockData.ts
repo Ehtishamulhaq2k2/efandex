@@ -1,14 +1,14 @@
 import {
-  AlertCircle,
   BookOpen,
-  Building,
-  FileText,
+  Building2,
   Home,
+  LayoutGrid,
   LogOut,
   Settings,
-  Users,
+  Share2,
+  SlidersHorizontal,
 } from "lucide-react";
-import { Booking, MenuItem, Registration, StatCardTypes } from "../types/types";
+import { Booking, Registration, StatCardTypes } from "../types/types";
 
 export const mockStats: StatCardTypes[] = [
   {
@@ -151,13 +151,14 @@ export const mockRegistrations: Registration[] = [
   },
 ];
 
-export const menuItems: MenuItem[] = [
+
+export const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: Home },
-  { id: "properties", label: "Properties", icon: Building },
-  { id: "users", label: "User Management", icon: Users },
-  { id: "bookings", label: "Bookings", icon: BookOpen },
-  { id: "disputes", label: "Dispute Centre", icon: AlertCircle },
+  { id: "properties", label: "Properties", icon: Building2 },
+  { id: "users", label: "User Managment", icon: Share2 },
+  { id: "bookings", label: "Bookings", icon: LayoutGrid },
+  { id: "disputes", label: "Dispute Centre", icon: SlidersHorizontal },
   { id: "settings", label: "Settings", icon: Settings },
-  { id: "privacy", label: "Privacy Policy", icon: FileText },
+  { id: "privacy", label: "Privacy Policy", icon: BookOpen },
   { id: "logout", label: "Logout", icon: LogOut },
 ];
