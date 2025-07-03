@@ -19,13 +19,21 @@ export const RegistrationsTable: React.FC<{
   onPageChange: (page: number) => void;
 }> = ({ registrations, currentPage, onPageChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const usersPerPage = 6;
 
+  // Filter users by search
   const filteredUsers = registrations.filter(
     (item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+  const startIndex = (currentPage - 1) * usersPerPage;
+  const currentUsers = filteredUsers.slice(startIndex, startIndex + usersPerPage);
+
+  // Export CSV
   const handleExport = () => {
     const headers = ["Name", "Category", "Join Date", "Email"];
     const rows = filteredUsers.map((item) => [
@@ -58,7 +66,7 @@ export const RegistrationsTable: React.FC<{
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTerm(e.target.value)
           }
-        />{" "}
+        />
         <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
           <Calendar className="w-4 h-4" />
           <span>Today</span>
@@ -100,43 +108,51 @@ export const RegistrationsTable: React.FC<{
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredUsers.map((registration) => (
-              <tr key={registration.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {registration.name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <CategoryBadge category={registration.category} />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {registration.joinDate}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {registration.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                  <button className="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 hover:text-red-700 transition">
-                    <XCircle className="w-4 h-4 mr-1" />
-                    Decline
-                  </button>
-
-                  {/* Approve Button */}
-                  <button className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-600 border border-green-200 hover:bg-green-100 hover:text-green-700 transition">
-                    <CheckCircle className="w-4 h-4 mr-1" />
-                    Approve
-                  </button>
+            {currentUsers.length > 0 ? (
+              currentUsers.map((registration) => (
+                <tr key={registration.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {registration.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <CategoryBadge category={registration.category} />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {registration.joinDate}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {registration.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                    <button className="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 hover:text-red-700 transition">
+                      <XCircle className="w-4 h-4 mr-1" />
+                      Decline
+                    </button>
+                    <button className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-600 border border-green-200 hover:bg-green-100 hover:text-green-700 transition">
+                      <CheckCircle className="w-4 h-4 mr-1" />
+                      Approve
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5} className="text-center py-8 text-gray-500">
+                  No users found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={10}
-        onPageChange={onPageChange}
-      />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      )}
     </div>
   );
 };
