@@ -23,6 +23,29 @@ export const BookingsTable: React.FC<{
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleExport = () => {
+    const headers = ["Name", "Status", "Price", "Capacity", "Duration"];
+    const rows = filteredItems.map((item) => [
+      item.name,
+      item.status,
+      item.price,
+      item.capacity,
+      item.duration,
+    ]);
+
+    let csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers, ...rows].map((e) => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "bookings.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
       <TableHeader title="Recent Bookings">
@@ -38,7 +61,10 @@ export const BookingsTable: React.FC<{
           <Calendar className="w-4 h-4" />
           <span>Today</span>
         </button>
-        <button className="flex items-center space-x-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800">
+        <button
+          onClick={handleExport}
+          className="flex items-center space-x-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+        >
           <Download className="w-4 h-4" />
           <span>Export</span>
         </button>

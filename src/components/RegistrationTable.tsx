@@ -19,6 +19,28 @@ export const RegistrationsTable: React.FC<{
       item.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleExport = () => {
+    const headers = ["Name", "Category", "Join Date", "Email"];
+    const rows = filteredUsers.map((item) => [
+      item.name,
+      item.category,
+      item.joinDate,
+      item.email,
+    ]);
+
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers, ...rows].map((row) => row.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "user_registrations.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       <TableHeader title="New User Registrations">
@@ -34,7 +56,10 @@ export const RegistrationsTable: React.FC<{
           <Calendar className="w-4 h-4" />
           <span>Today</span>
         </button>
-        <button className="flex items-center space-x-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800">
+        <button
+          onClick={handleExport}
+          className="flex items-center space-x-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+        >
           <Download className="w-4 h-4" />
           <span>Export</span>
         </button>

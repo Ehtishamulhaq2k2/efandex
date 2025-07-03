@@ -1,4 +1,4 @@
-import { Icon } from "lucide-react";
+import { CheckCircle, Circle } from "lucide-react";
 
 export const StatusBadge: React.FC<{
   status: string;
@@ -11,16 +11,23 @@ export const StatusBadge: React.FC<{
   };
 
   const dotColors = {
-    green: "bg-green-500",
-    yellow: "bg-yellow-500",
-    red: "bg-red-500",
+    green: "text-green-500",
+    yellow: "text-yellow-500",
+    red: "text-red-500",
   };
 
   return (
     <span
       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colors[color]}`}
     >
-      <Icon className="mr-3 w-4 h-4" iconNode={[]} />
+      {status === "Completed" ? (
+        <CheckCircle className="mr-1 w-4 h-4 text-green-500" />
+      ) : (
+        <Circle
+          className={`mr-1 w-3 h-3 ${dotColors[color]}`}
+          fill="currentColor"
+        />
+      )}
       {status}
     </span>
   );

@@ -2,13 +2,10 @@ import {
   ArrowBigDown,
   ArrowBigUp,
   ChevronDown,
-  TrendingDown,
-  TrendingUp,
 } from "lucide-react";
-import { StatCardTypes } from "../types/types";
-
 import React from "react";
 import { StatChart } from "./StatusChart";
+
 interface StatCardData {
   title: string;
   value: string;
@@ -39,7 +36,7 @@ export const StatCard: React.FC<StatCardProps> = ({ stat }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-shadow w-full">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-shadow w-full max-w-full min-w-0">
       {/* Header with dropdown and trend */}
       <div className="flex items-start justify-between mb-4 sm:mb-6">
         <div className="relative">
