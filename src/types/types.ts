@@ -1,11 +1,23 @@
+export type TimePeriod =
+  | "Last Month"
+  | "Last 3 Months"
+  | "Last 6 Months"
+  | "Last Year";
+
 export interface StatCardTypes {
   title: string;
-  value: string;
-  subtitle: string;
-  change: string;
-  isPositive: boolean;
-  color: '#3b82f6' | '#22c55e' | 'red';
+  color: string;
+  data: Record<
+    TimePeriod,
+    {
+      value: string;
+      subtitle: string;
+      change: string;
+      isPositive: boolean;
+    }
+  >;
 }
+
 
 export interface Booking {
   id: string;

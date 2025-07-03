@@ -13,27 +13,93 @@ import { Booking, Registration, StatCardTypes } from "../types/types";
 export const mockStats: StatCardTypes[] = [
   {
     title: "Active Users",
-    value: "3632",
-    subtitle: "Overall last month",
-    change: "+30.5626%",
-    isPositive: true,
     color: "#3b82f6",
+    data: {
+      "Last Month": {
+        value: "3632",
+        change: "+30.5626%",
+        isPositive: true,
+        subtitle: "Overall last month",
+      },
+      "Last 3 Months": {
+        value: "8991",
+        change: "+18.3%",
+        isPositive: true,
+        subtitle: "Overall last 3 months",
+      },
+      "Last 6 Months": {
+        value: "14012",
+        change: "+12.5%",
+        isPositive: true,
+        subtitle: "Overall last 6 months",
+      },
+      "Last Year": {
+        value: "20201",
+        change: "+5.2%",
+        isPositive: true,
+        subtitle: "Overall last year",
+      },
+    },
   },
   {
     title: "Total Properties",
-    value: "10k+",
-    subtitle: "Overall last month",
-    change: "+30.5626%",
-    isPositive: true,
     color: "#22c55e",
+    data: {
+      "Last Month": {
+        value: "10k+",
+        change: "+30.5626%",
+        isPositive: true,
+        subtitle: "Overall last month",
+      },
+      "Last 3 Months": {
+        value: "26k+",
+        change: "+22.1%",
+        isPositive: true,
+        subtitle: "Overall last 3 months",
+      },
+      "Last 6 Months": {
+        value: "35k+",
+        change: "+14.8%",
+        isPositive: true,
+        subtitle: "Overall last 6 months",
+      },
+      "Last Year": {
+        value: "55k+",
+        change: "+7.3%",
+        isPositive: true,
+        subtitle: "Overall last year",
+      },
+    },
   },
   {
     title: "Total Revenue",
-    value: "$900K",
-    subtitle: "Overall this month",
-    change: "-30.5626%",
-    isPositive: false,
-    color: "red",
+    color: "#ef4444",
+    data: {
+      "Last Month": {
+        value: "$900K",
+        change: "-30.5626%",
+        isPositive: false,
+        subtitle: "Overall this month",
+      },
+      "Last 3 Months": {
+        value: "$2.1M",
+        change: "-18.3%",
+        isPositive: false,
+        subtitle: "Overall last 3 months",
+      },
+      "Last 6 Months": {
+        value: "$4.3M",
+        change: "+9.1%",
+        isPositive: true,
+        subtitle: "Overall last 6 months",
+      },
+      "Last Year": {
+        value: "$8.9M",
+        change: "+25.6%",
+        isPositive: true,
+        subtitle: "Overall last year",
+      },
+    },
   },
 ];
 

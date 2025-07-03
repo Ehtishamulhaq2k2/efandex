@@ -1,33 +1,16 @@
-import {
-  ArrowBigDown,
-  ArrowBigUp,
-  ChevronDown,
-} from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, ChevronDown } from "lucide-react";
 import React from "react";
 import { StatChart } from "./StatusChart";
-
-interface StatCardData {
-  title: string;
-  value: string;
-  subtitle: string;
-  change: string;
-  isPositive: boolean;
-  color: string;
-}
-
+import { StatCardTypes, TimePeriod } from "../types/types";
 interface StatCardProps {
-  stat: StatCardData;
+  stat: StatCardTypes;
 }
-
-type TimePeriod =
-  | "Last Month"
-  | "Last 3 Months"
-  | "Last 6 Months"
-  | "Last Year";
 
 export const StatCard: React.FC<StatCardProps> = ({ stat }) => {
   const [selectedPeriod, setSelectedPeriod] =
     React.useState<TimePeriod>("Last Month");
+
+  const currentData = stat?.data[selectedPeriod];
 
   const handlePeriodChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -37,7 +20,7 @@ export const StatCard: React.FC<StatCardProps> = ({ stat }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-shadow w-full max-w-full min-w-0">
-      {/* Header with dropdown and trend */}
+      {/* Header */}
       <div className="flex items-start justify-between mb-4 sm:mb-6">
         <div className="relative">
           <select
@@ -52,36 +35,43 @@ export const StatCard: React.FC<StatCardProps> = ({ stat }) => {
           </select>
           <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 text-gray-400 pointer-events-none" />
         </div>
-        <div className="flex items-center space-x-1 sm:space-x-2">
-          {stat.isPositive ? (
-            <ArrowBigUp className="w-6 h-6 sm:w-10 sm:h-10 text-green-500" />
-          ) : (
-            <ArrowBigDown className="w-6 h-6 sm:w-10 sm:h-10 text-red-500" />
-          )}
 
+        <div className="flex items-center space-x-1 sm:space-x-2">
+          {currentData.isPositive ? (
+            <ArrowBigUp
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              style={{ color: stat.color }}
+            />
+          ) : (
+            <ArrowBigDown
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              style={{ color: stat.color }}
+            />
+          )}
           <span
-            className={`text-xs sm:text-sm font-medium ${
-              stat.isPositive ? "text-green-600" : "text-red-600"
-            }`}
+            className="text-xs sm:text-sm font-medium"
+            style={{ color: stat.color }}
           >
-            {stat.change}
+            {currentData.change}
           </span>
         </div>
       </div>
 
-      {/* Content with title, value, and chart */}
+      {/* Body */}
       <div className="flex items-end justify-between">
         <div className="flex-1 min-w-0">
           <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 truncate">
             {stat.title}
           </h3>
           <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
-            {stat.value}
+            {currentData.value}
           </p>
-          <p className="text-xs sm:text-sm text-gray-500">{stat.subtitle}</p>
+          <p className="text-xs sm:text-sm text-gray-500">
+            {currentData.subtitle}
+          </p>
         </div>
         <div className="ml-2 sm:ml-4 flex-shrink-0">
-          <StatChart color={stat.color} isPositive={stat.isPositive} />
+          <StatChart color={stat.color} isPositive={currentData.isPositive} />
         </div>
       </div>
     </div>
